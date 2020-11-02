@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Click the Get Data button to call sample API.</h1>
+        <button id="btnLoad">Get Data</button>
+        <ul id="msgList" style="text-align: left"></ul>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("#btnLoad").click(function () {
+                    $.ajax({
+                        type: "GET",
+                        headers: {
+                            "accept": "text/html"
+                        },
+                        url: "https://localhost:44306/api/helloworld",
+                        success: function (data) {
+                            for (let i = 0; i < 10; i++) {
+                                let li = document.createElement("li");
+                                li.innerHTML = data;
+                                $("#msgList").append(li);
+
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
